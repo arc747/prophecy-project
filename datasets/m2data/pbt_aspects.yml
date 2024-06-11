@@ -1,0 +1,61 @@
+version: 1
+schema:
+  type: struct
+  fields:
+  - name: _corrupt_record
+    type: string
+    nullable: true
+    metadata:
+      description: String representation of any corrupt or malformed records in the
+        dataset
+      mappings: []
+      tags: []
+  - name: date_introduced
+    type: string
+    nullable: true
+    metadata:
+      description: The date when the product was introduced
+      mappings: []
+      tags: []
+  - name: extra_field
+    type: string
+    nullable: true
+    metadata:
+      description: An additional field associated with the product
+      mappings: []
+      tags: []
+  - name: main_category
+    type: string
+    nullable: true
+    metadata:
+      description: The main category to which the product belongs
+      mappings: []
+      tags: []
+  - name: name
+    type: string
+    nullable: true
+    metadata:
+      description: The name of the product
+      mappings: []
+      tags: []
+  - name: price_usd_cents
+    type: string
+    nullable: true
+    metadata:
+      description: Price of the product in USD cents
+      mappings: []
+      tags: []
+  - name: product_id
+    type: long
+    nullable: true
+    metadata:
+      description: The unique identifier for the product
+      mappings: []
+      tags: []
+  - name: sub_category
+    type: string
+    nullable: true
+    metadata:
+      description: The sub-category of the product
+      mappings: []
+      tags: []
