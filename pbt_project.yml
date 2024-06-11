@@ -1,6 +1,6 @@
 name: prophecy_pipelines
 description: ''
-version: 0.0.1
+version: '0.2'
 author: ar747c@gmail.com
 language: python
 buildSystem: ''
