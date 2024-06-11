@@ -23,7 +23,8 @@ pipelines:
       inputs:
       - datasets/m2data
       - datasets/mdata
-      outputs: []
+      outputs:
+      - datasets/sp_data
     subgraphs: []
     dependencies: {}
 datasets:
@@ -53,6 +54,19 @@ datasets:
         description: ''
         author: ar747c@gmail.com
         createdAt: '2024-06-11 17:16:28'
+  datasets/sp_data:
+    name: sp_data
+    description: ''
+    author: ar747c@gmail.com
+    createdAt: '2024-06-11 18:42:22'
+    mode: batch
+    physicalDatasets:
+      dev_:
+        fabricId: 13778
+        datasetType: File
+        description: ''
+        author: ar747c@gmail.com
+        createdAt: '2024-06-11 18:42:22'
 templates: {}
 jobs: {}
 gemContainer:

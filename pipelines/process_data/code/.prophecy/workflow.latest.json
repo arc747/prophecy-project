@@ -102,32 +102,38 @@
     "target" : "Gk1h75GVU1gpsC075ZOuf$$sUwl6Lz88fqYlOBxnA1i6",
     "targetPort" : "sgWa1-b-ECS0L1V0obZxD$$KfgD09G1pC8W8sTyHJeln"
   }, {
-    "id" : "WAJhicQ7F3Sr33j0Ycff4$$JH2t70lc70eDVtgMVSINI",
+    "id" : "ThRC36QWtimUUFICfaArQ",
     "source" : "Gk1h75GVU1gpsC075ZOuf$$sUwl6Lz88fqYlOBxnA1i6",
     "sourcePort" : "vw56uPZMyLq2Go_OniXBO$$v1DmWbVJLZ4S5WRg75G4l",
+    "target" : "XfHgtvTfm9hQpf2xCpWOY$$wMxPgYuS9EjGkSixfhrnT",
+    "targetPort" : "4JIAClPN6M4Q-2ZtWltSn$$puH0QEIc2iw-M_bwLW7wG"
+  }, {
+    "id" : "qwYzNkYGph9yg23O8ts5j$$oaxZVDaRgcbIPeIKdu3AA",
+    "source" : "XfHgtvTfm9hQpf2xCpWOY$$wMxPgYuS9EjGkSixfhrnT",
+    "sourcePort" : "fV4oIZoHSW8_OEQOkBBhd$$cxW7GlRDDX9aZ6ARJ4mfl",
     "target" : "ugOV-JSrsPRFy26nK-duR$$l04CYbcYfqHDS5tWfb326",
     "targetPort" : "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s"
   }, {
-    "id" : "3-UIYwjtX8wNice7LsIfp$$gU_xReQ9DMqfHkJrjxmzy",
+    "id" : "n3JtFIsqFzeTKKAMH_YLF$$ScuYqXhz1FEDkWsuRVoVI",
     "source" : "ugOV-JSrsPRFy26nK-duR$$l04CYbcYfqHDS5tWfb326",
     "sourcePort" : "ck3OHhW0URc3fy0B-ps81$$E8kAGYSjWJxzKAW9bu3Y2",
-    "target" : "whsGfqtAgzFoj-OjEWpmM$$_vUIOuUT2TJPJRtuxQ71V",
-    "targetPort" : "JHA7mU4MiFIz-ehorWFfP$$_bhWweWTFiREom_WKG4mJ"
+    "target" : "DW84_IBkUE5yFazA3fgrS$$_DS9yOWv_Jw86u2H8yUcV",
+    "targetPort" : "lurWRgVpPHzIM_AzMZbsH$$5QRBiy2STKvV2QQzfT32Z"
   } ],
   "processes" : {
     "qc2s_WEnRXPeAMbvRf-D2$$AHBcuozFc9IKLKU4kBdjb" : {
       "id" : "qc2s_WEnRXPeAMbvRf-D2$$AHBcuozFc9IKLKU4kBdjb",
       "component" : "Source",
       "metadata" : {
-        "label" : "sales",
-        "slug" : "sales",
+        "label" : "read_product_line_data",
+        "slug" : "read_product_line_data",
         "x" : -2980,
         "y" : -260,
         "phase" : 0,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false,
-        "comment" : "Reads sales data from a JSON file, containing information about various products such as their names, categories, prices, and introduction dates.",
+        "comment" : "Reads product line data from a JSON file, containing information such as product name, category, price, and introduction date.",
         "autoUpdateComment" : true
       },
       "ports" : {
@@ -414,7 +420,7 @@
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false,
-        "comment" : "Joins two dataframes based on the product ID, keeping all records from the left dataframe and matching records from the right dataframe.",
+        "comment" : "Joins two dataframes based on product ID, combining customer and product information.",
         "autoUpdateComment" : true
       },
       "ports" : {
@@ -549,9 +555,73 @@
             "format" : "sql",
             "expression" : "in0.product_id=in1.product_id"
           },
-          "joinType" : "left_outer"
+          "joinType" : "right_outer"
         } ],
-        "expressions" : [ ],
+        "expressions" : [ {
+          "target" : "customer_id",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "in0.customer_id"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "product_id",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "in1.product_id"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "price_usd_cents",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "in1.price_usd_cents"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "sub_category",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "in1.sub_category"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "name",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "in1.name"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "main_category",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "in1.main_category"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "date_introduced",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "in1.date_introduced"
+          },
+          "description" : "",
+          "_row_id" : null
+        }, {
+          "target" : "sale_date",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "in0.sale_date"
+          },
+          "description" : "",
+          "_row_id" : null
+        } ],
         "hints" : [ {
           "id" : "-EQ_Br3XDuer1UlNbFflw$$pq4pvWmnjDdMkDNkuOV1P",
           "alias" : "in0",
@@ -564,8 +634,8 @@
           "propagateColumns" : false
         } ],
         "allIn1" : null,
-        "activeTab" : "conditions",
-        "columnsSelector" : [ "sgWa1-b-ECS0L1V0obZxD$$KfgD09G1pC8W8sTyHJeln##product_id", "-EQ_Br3XDuer1UlNbFflw$$pq4pvWmnjDdMkDNkuOV1P##product_id" ],
+        "activeTab" : "expressions",
+        "columnsSelector" : [ "sgWa1-b-ECS0L1V0obZxD$$KfgD09G1pC8W8sTyHJeln##product_id", "-EQ_Br3XDuer1UlNbFflw$$pq4pvWmnjDdMkDNkuOV1P##product_id", "sgWa1-b-ECS0L1V0obZxD$$KfgD09G1pC8W8sTyHJeln##price_usd_cents", "sgWa1-b-ECS0L1V0obZxD$$KfgD09G1pC8W8sTyHJeln##sub_category", "sgWa1-b-ECS0L1V0obZxD$$KfgD09G1pC8W8sTyHJeln##date_introduced", "sgWa1-b-ECS0L1V0obZxD$$KfgD09G1pC8W8sTyHJeln##main_category", "-EQ_Br3XDuer1UlNbFflw$$pq4pvWmnjDdMkDNkuOV1P##customer_id", "sgWa1-b-ECS0L1V0obZxD$$KfgD09G1pC8W8sTyHJeln##product_id", "-EQ_Br3XDuer1UlNbFflw$$pq4pvWmnjDdMkDNkuOV1P##sale_date", "sgWa1-b-ECS0L1V0obZxD$$KfgD09G1pC8W8sTyHJeln##name" ],
         "allIn0" : null,
         "whereClause" : null,
         "headAlias" : "in0"
@@ -579,15 +649,15 @@
       "id" : "0Ue0FeZ-so53J6j5MMY7S$$Dw3EylwZs0Sn5fPsHv2nk",
       "component" : "Source",
       "metadata" : {
-        "label" : "product",
-        "slug" : "product",
+        "label" : "read_sales_data",
+        "slug" : "read_sales_data",
         "x" : -2960,
         "y" : -580,
         "phase" : 0,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false,
-        "comment" : "Loads sales data from a Parquet file into a DataFrame.",
+        "comment" : "Reads sales data from a Parquet file.",
         "autoUpdateComment" : true
       },
       "ports" : {
@@ -602,6 +672,186 @@
       },
       "properties" : {
         "datasetId" : "datasets/mdata"
+      }
+    },
+    "XfHgtvTfm9hQpf2xCpWOY$$wMxPgYuS9EjGkSixfhrnT" : {
+      "id" : "XfHgtvTfm9hQpf2xCpWOY$$wMxPgYuS9EjGkSixfhrnT",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "reformatted_data",
+        "slug" : "reformatted_data",
+        "x" : -1960,
+        "y" : -440,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false,
+        "comment" : "Reformats the input data by selecting specific columns and creating a new column representing the sales quarter and year.",
+        "autoUpdateComment" : true
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "4JIAClPN6M4Q-2ZtWltSn$$puH0QEIc2iw-M_bwLW7wG",
+          "slug" : "in0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "customer_id",
+              "type" : "integer",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "The unique ID of the customer",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "product_id",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "The unique identifier for the product",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "price_usd_cents",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "Price of the product in USD cents",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "sub_category",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "The sub-category of the product",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "name",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "The name of the product",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "main_category",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "The main category to which the product belongs",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "date_introduced",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "The date when the product was introduced",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "sale_date",
+              "type" : "date",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "Date when the product was sold to the customer",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "fV4oIZoHSW8_OEQOkBBhd$$cxW7GlRDDX9aZ6ARJ4mfl",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "importLanguage" : "${$.workflow.metainfo.frontEndLanguage}",
+        "expressions" : [ {
+          "target" : "product_id",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "product_id"
+          },
+          "description" : ""
+        }, {
+          "target" : "customer_id",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "customer_id"
+          },
+          "description" : ""
+        }, {
+          "target" : "date_introduced",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "date_introduced"
+          },
+          "description" : ""
+        }, {
+          "target" : "name",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "name"
+          },
+          "description" : ""
+        }, {
+          "target" : "sale_date",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "sale_date"
+          },
+          "description" : ""
+        }, {
+          "target" : "price_usd_cents",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "price_usd_cents"
+          },
+          "description" : ""
+        }, {
+          "target" : "sub_category",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "sub_category"
+          },
+          "description" : ""
+        }, {
+          "target" : "main_category",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "main_category"
+          },
+          "description" : ""
+        }, {
+          "target" : "sale_qtr",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "concat('Q', CAST(quarter(sale_date) AS STRING), ' ', CAST(year(to_date(sale_date)) AS STRING))"
+          },
+          "description" : ""
+        } ],
+        "importString" : "",
+        "activeTab" : "expressions",
+        "columnsSelector" : [ "4JIAClPN6M4Q-2ZtWltSn$$puH0QEIc2iw-M_bwLW7wG##date_introduced", "4JIAClPN6M4Q-2ZtWltSn$$puH0QEIc2iw-M_bwLW7wG##main_category", "4JIAClPN6M4Q-2ZtWltSn$$puH0QEIc2iw-M_bwLW7wG##sub_category", "4JIAClPN6M4Q-2ZtWltSn$$puH0QEIc2iw-M_bwLW7wG##sale_date", "4JIAClPN6M4Q-2ZtWltSn$$puH0QEIc2iw-M_bwLW7wG##price_usd_cents", "4JIAClPN6M4Q-2ZtWltSn$$puH0QEIc2iw-M_bwLW7wG##name", "4JIAClPN6M4Q-2ZtWltSn$$puH0QEIc2iw-M_bwLW7wG##product_id", "4JIAClPN6M4Q-2ZtWltSn$$puH0QEIc2iw-M_bwLW7wG##customer_id" ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12654.git&subPath=&tag=0.2.25&projectSubscriptionProjectId=12654&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsPython"
       }
     },
     "IacAhmN4ZBJPt6h2d5aCx$$cxUUchqRT5YFSMnO4eUsC" : {
@@ -700,13 +950,13 @@
       "metadata" : {
         "label" : "deduplicate_by_columns",
         "slug" : "deduplicate_by_columns",
-        "x" : -1960,
+        "x" : -1760,
         "y" : -440,
         "phase" : 0,
         "cache" : false,
         "detailedStats" : false,
         "isImported" : false,
-        "comment" : "Removes duplicate records based on specific columns in the input DataFrame.",
+        "comment" : "Removes duplicate records from the dataset.",
         "autoUpdateComment" : true
       },
       "ports" : {
@@ -716,6 +966,15 @@
           "schema" : {
             "type" : "struct",
             "fields" : [ {
+              "name" : "product_id",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "The unique identifier for the product",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "customer_id",
               "type" : "integer",
               "nullable" : true,
@@ -725,17 +984,8 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "product_id",
-              "type" : "integer",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "The unique ID of the product",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "date_introduced",
-              "type" : "date",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "The date when the product was introduced",
@@ -761,15 +1011,6 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "product_id",
-              "type" : "long",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "The unique identifier for the product",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "price_usd_cents",
               "type" : "string",
               "nullable" : true,
@@ -788,15 +1029,6 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "name",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "The name of the product",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "main_category",
               "type" : "string",
               "nullable" : true,
@@ -806,11 +1038,11 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "date_introduced",
+              "name" : "sale_qtr",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
-                "description" : "The date when the product was introduced",
+                "description" : "",
                 "mappings" : [ ],
                 "tags" : [ ]
               }
@@ -848,8 +1080,8 @@
         }, {
           "colName" : "price_usd_cents"
         } ],
-        "dedupType" : "any",
-        "columnsSelector" : [ "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s##main_category", "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s##sale_date", "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s##sub_category", "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s##price_usd_cents", "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s##customer_id" ],
+        "dedupType" : "distinct",
+        "columnsSelector" : [ "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s##main_category", "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s##date_introduced", "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s##sale_date", "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s##sub_category", "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s##name", "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s##price_usd_cents", "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s##product_id", "sQJcFxj3dFMkCTbjh6LjI$$7xeTmxv-gg-HmwAYg3B5s##customer_id" ],
         "orders" : [ ],
         "useOrderBy" : false
       },
@@ -858,13 +1090,13 @@
         "projectName" : "ProphecySparkBasicsPython"
       }
     },
-    "whsGfqtAgzFoj-OjEWpmM$$_vUIOuUT2TJPJRtuxQ71V" : {
-      "id" : "whsGfqtAgzFoj-OjEWpmM$$_vUIOuUT2TJPJRtuxQ71V",
+    "DW84_IBkUE5yFazA3fgrS$$_DS9yOWv_Jw86u2H8yUcV" : {
+      "id" : "DW84_IBkUE5yFazA3fgrS$$_DS9yOWv_Jw86u2H8yUcV",
       "component" : "Target",
       "metadata" : {
-        "label" : "Target_1",
-        "slug" : "Target_1",
-        "x" : -1820,
+        "label" : "sp_data",
+        "slug" : "sp_data",
+        "x" : -1600,
         "y" : -440,
         "phase" : 0,
         "cache" : false,
@@ -873,11 +1105,20 @@
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "JHA7mU4MiFIz-ehorWFfP$$_bhWweWTFiREom_WKG4mJ",
+          "id" : "lurWRgVpPHzIM_AzMZbsH$$5QRBiy2STKvV2QQzfT32Z",
           "slug" : "in0",
           "schema" : {
             "type" : "struct",
             "fields" : [ {
+              "name" : "product_id",
+              "type" : "long",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "The unique identifier for the product",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
               "name" : "customer_id",
               "type" : "integer",
               "nullable" : true,
@@ -887,17 +1128,8 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "product_id",
-              "type" : "integer",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "The unique ID of the product",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "date_introduced",
-              "type" : "date",
+              "type" : "string",
               "nullable" : true,
               "metadata" : {
                 "description" : "The date when the product was introduced",
@@ -923,15 +1155,6 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "product_id",
-              "type" : "long",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "The unique identifier for the product",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "price_usd_cents",
               "type" : "string",
               "nullable" : true,
@@ -950,15 +1173,6 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "name",
-              "type" : "string",
-              "nullable" : true,
-              "metadata" : {
-                "description" : "The name of the product",
-                "mappings" : [ ],
-                "tags" : [ ]
-              }
-            }, {
               "name" : "main_category",
               "type" : "string",
               "nullable" : true,
@@ -968,11 +1182,11 @@
                 "tags" : [ ]
               }
             }, {
-              "name" : "date_introduced",
+              "name" : "sale_qtr",
               "type" : "string",
               "nullable" : true,
               "metadata" : {
-                "description" : "The date when the product was introduced",
+                "description" : "",
                 "mappings" : [ ],
                 "tags" : [ ]
               }
@@ -985,7 +1199,9 @@
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
       },
-      "properties" : { }
+      "properties" : {
+        "datasetId" : "datasets/sp_data"
+      }
     }
   },
   "ports" : {
@@ -994,23 +1210,5 @@
     "selectedInputFields" : [ ],
     "isCustomOutputSchema" : false,
     "autoUpdateOnRun" : false
-  },
-  "diagnostics" : [ {
-    "property" : "$.workflow.processes.whsGfqtAgzFoj-OjEWpmM$$_vUIOuUT2TJPJRtuxQ71V.properties.datasetId",
-    "range" : {
-      "start" : {
-        "line" : 0,
-        "character" : 0
-      },
-      "end" : {
-        "line" : 0,
-        "character" : 0
-      }
-    },
-    "severity" : 1,
-    "message" : "dataset id missing",
-    "tags" : [ ],
-    "relatedInformation" : [ ],
-    "diagnosticType" : 1
-  } ]
+  }
 }

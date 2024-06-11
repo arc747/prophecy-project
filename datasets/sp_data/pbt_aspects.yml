@@ -1,0 +1,67 @@
+version: 1
+schema:
+  type: struct
+  fields:
+  - name: product_id
+    type: long
+    nullable: true
+    metadata:
+      description: The unique identifier for the product
+      mappings: []
+      tags: []
+  - name: customer_id
+    type: integer
+    nullable: true
+    metadata:
+      description: The unique ID of the customer
+      mappings: []
+      tags: []
+  - name: date_introduced
+    type: string
+    nullable: true
+    metadata:
+      description: The date when the product was introduced
+      mappings: []
+      tags: []
+  - name: name
+    type: string
+    nullable: true
+    metadata:
+      description: The name of the product
+      mappings: []
+      tags: []
+  - name: sale_date
+    type: date
+    nullable: true
+    metadata:
+      description: Date when the product was sold to the customer
+      mappings: []
+      tags: []
+  - name: price_usd_cents
+    type: string
+    nullable: true
+    metadata:
+      description: Price of the product in USD cents
+      mappings: []
+      tags: []
+  - name: sub_category
+    type: string
+    nullable: true
+    metadata:
+      description: The sub-category of the product
+      mappings: []
+      tags: []
+  - name: main_category
+    type: string
+    nullable: true
+    metadata:
+      description: The main category to which the product belongs
+      mappings: []
+      tags: []
+  - name: sale_qtr
+    type: string
+    nullable: true
+    metadata:
+      description: ''
+      mappings: []
+      tags: []
