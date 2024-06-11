@@ -6,7 +6,7 @@ from prophecy.libs import typed_lit
 from process_data.config.ConfigStore import *
 from process_data.functions import *
 
-def sales(spark: SparkSession) -> DataFrame:
+def read_product_line_data(spark: SparkSession) -> DataFrame:
     return spark.read\
         .format("json")\
         .schema(

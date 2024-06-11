@@ -6,5 +6,5 @@ from prophecy.libs import typed_lit
 from process_data.config.ConfigStore import *
 from process_data.functions import *
 
-def product(spark: SparkSession) -> DataFrame:
+def read_sales_data(spark: SparkSession) -> DataFrame:
     return spark.read.format("parquet").load("dbfs:/course_lab_originals/rainforest_biz_sources/sales_parquet/")

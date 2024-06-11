@@ -7,6 +7,4 @@ from process_data.config.ConfigStore import *
 from process_data.functions import *
 
 def deduplicate_by_columns(spark: SparkSession, in0: DataFrame) -> DataFrame:
-    return in0.dropDuplicates(
-        ["customer_id",  "date_introduced",  "name",  "sale_date",  "name",  "sub_category",  "main_category",  "product_id",          "product_id",  "price_usd_cents"]
-    )
+    return in0.distinct()
